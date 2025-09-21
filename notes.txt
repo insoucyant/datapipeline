@@ -20,5 +20,5 @@ db-# \dt public.* # This will list all the tables that exist within the public s
 # After you run the insert records.py and just create the table in deb schema
 db=# \dt dev.*
 db=# SELECT * FROM dev.raw_weather_data; # There will be no data but the tab;le schema would be created.
-
+db=# truncate table dev.raw_weather_data; # Deletes all record from the table.
 

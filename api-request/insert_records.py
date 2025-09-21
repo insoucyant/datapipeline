@@ -39,6 +39,48 @@ def create_table(conn):
         print(f"Failed to create the table: {e}")
         raise
 
-conn = connect_to_db() 
-create_table(conn)
 
+def insert_records(conn, data):
+    print("Inserting weather data into the database...")
+    try:
+        weather = data['current']
+        location = data['location']
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO dev.raw_weather_data(
+                city,
+                temperature,
+                weather_description,
+                wind_speed,
+                time,
+                inserted_at,
+                utc_offset
+            ) VALUES (%s, %s, %s, %s, %s, NOW(), %s)
+            """,(
+                location['name'],
+                weather['temperature'],
+                weather['weather_descriptions'][0],
+                weather['wind_speed'],
+                location['localtime'],
+                location['utc_offset']
+        ))
+        conn.commit()
+        print("Data Successfully interested...")
+    except psycopg2.Error as e:
+        print(f"Error Inserting data into the database: {e}")
+        raise
+
+def main():
+    try:
+        data = mock_fetch_data()
+        conn = connect_to_db() 
+        create_table(conn)
+        insert_records(conn, data)
+    except Exception as e:
+        print("An error ocureed during execution: {e}")
+    finally:
+        if 'conn' in locals():
+            conn.close()
+            print("Database connection closed.")
+
+main()
