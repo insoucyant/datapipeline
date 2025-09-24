@@ -18,7 +18,7 @@ services:
 
   af:
     container_name: airflow_container
-    image: apache/airflow:3.0.0
+    image: apache/airflow:3.0.6
     ports:
       - 8000:8080
     environment:

@@ -1,3 +1,4 @@
+
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
@@ -19,7 +20,7 @@ dag = DAG(
     dag_id = 'weather-api-orchestrator',
     default_args=default_args,
     description = 'A DAG to orchestrate data',
-    schedule_interval=timedelta(minutes=10),
+    schedule=timedelta(minutes=10),
     catchup=False
 )
 
