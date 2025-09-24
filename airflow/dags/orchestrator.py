@@ -10,15 +10,16 @@ def safe_main_callable():
     return main()
 
 default_args = {
-    'start_date':datetime(2025,9,24)
+    'start_date':datetime(2025,9,24),
     'retries':1,
-    'retry_delay':timedelta(minutes=5)}
+    'retry_delay':timedelta(minutes=5)
+    }
 
 dag = DAG(
     dag_id = 'weather-api-orchestrator',
     default_args=default_args,
     description = 'A DAG to orchestrate data',
-    schedule=timedelta(minutes=10),
+    schedule_interval=timedelta(minutes=10),
     catchup=False
 )
 
