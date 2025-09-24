@@ -22,3 +22,16 @@ db=# \dt dev.*
 db=# SELECT * FROM dev.raw_weather_data; # There will be no data but the tab;le schema would be created.
 db=# truncate table dev.raw_weather_data; # Deletes all record from the table.
 
+#Airflow
+For the ports, we will bind local port 8000 to the server's port 8080.
+For the environment variables, We are going to overwrite AIRFLOW__DATABASE__SQL_ALCHEMY_CONN with the address of our desired database. 
+We want to create a new database just for airflow so that it can store its metadata over there.
+We also want to create a new user for airflow, so that it can have ownership over the new database.
+Inside the postgres folder we want to create a new filr airflow_init.sql. 
+We do not haver permission to make the file. Let's check the permission of the folder.
+ls -l /home/sumit/repos/weather-data-project/postgres
+drwx------ 19 dnsmasq root 4096 Sep 20 12:19 data
+This 'dnsmasq' is the user inside the postgres container. All of the dashes mean we do not have any access at all.
+Let us add the group write permission to this directory.
+
+

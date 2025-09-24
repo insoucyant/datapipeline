@@ -2,7 +2,7 @@ import requests
 api_key = "e8acbff7bbdd21d20a634d800681fdca"
 api_url = f"http://api.weatherstack.com/current?access_key={api_key}&query=New York"
 
-def fetch_data():
+def fetch_data():sud
     print("Fetching Weather data from WeatherStack API ...")
     try:
         response = requests.get(api_url)
